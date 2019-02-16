@@ -2,7 +2,7 @@ const {db} = require('./server/db')
 const {green, red} = require('chalk')
 
 const seed = async () => {
-  await db.sync({force: true})
+  await db.sync()
 
   // seed your database here!
 
