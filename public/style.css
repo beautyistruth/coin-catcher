@@ -1,3 +1,4 @@
+
 a {
   text-decoration: none;
 }
@@ -18,7 +19,8 @@ form div {
 
 * {
   box-sizing: border-box;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
 }
 
 body {
@@ -26,6 +28,9 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 70px 0;
-  background: #161c22;
-  color: white;
+}
+
+.input {
+  width: 200px;
+  border-radius: 50px;
 }

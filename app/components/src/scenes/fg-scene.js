@@ -20,7 +20,7 @@ export default class FgScene extends Phaser.Scene {
     this.load.image('ground', 'assets/platform.png')
     this.load.image('coin', 'assets/coinGold.png')
     this.load.image('bomb', 'assets/bomb.png')
-    this.load.image('cloud', 'assets/cloud.png')
+    this.load.image('cloud', 'assets/cloud-platform.png')
     this.load.spritesheet('dude', 'assets/dude.png', {
       frameWidth: 32,
       frameHeight: 48

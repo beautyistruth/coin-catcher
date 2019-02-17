@@ -28,19 +28,18 @@ class StartGame extends React.Component {
       <div>
         {this.state.redirect && <Redirect to={`./${this.state.value}`} />}
         <h3>Coin Grabber</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} >
           <label>
-            Nickname:
             <input
+              className="input"
               type="text"
               value={this.state.value}
               onChange={this.handleChange}
+              placeholder="Nickname"
             />
           </label>
           <input type="submit" value="Play Game" />
         </form>
-        <h3>High Scores</h3>
-        <div>{}</div>
       </div>
     )
   }
