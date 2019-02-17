@@ -1,33 +1,31 @@
-/*
- * Hi! I'm your stylesheet! I've got some sensible defaults here,
- * but feel free to change me to your heart's content!
- */
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+nav a {
+  display: inline-block;
+  margin: 1em;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
 
 * {
   box-sizing: border-box;
-  font-family: arial, sans-serif;
+  font-family: 'Press Start 2P', cursive;
 }
 
 body {
-  background: linear-gradient(#ffffff, #c0c0c0);
-  height: 100vh;
-  padding: 0;
-  margin: 0;
-  width: 100vw;
-}
-
-nav {
-  align-items: center;
-  background-color: #333333;
-  color: #c0c0c0;
-  display: flex;
-  height: 80px;
-  padding: 10px;
-}
-
-main {
-  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  padding: 70px 0;
+  background: #161c22;
+  color: white;
 }
