@@ -3,8 +3,7 @@
 const {db} = require('./server/db')
 const app = require('./server')
 
-db.sync()
+db.sync({force: true})
   .then(() => {
-    console.log('db synced')
     app.listen(process.env.PORT || 1337)
   })
