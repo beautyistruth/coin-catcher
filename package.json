@@ -4,7 +4,6 @@
   "description": "A review time project",
   "main": "main.js",
   "scripts": {
-    "deploy": "script/deploy",
     "start:dev": "npm run build-watch & npm run start-server",
     "start-server": "nodemon --watch server main.js -e html,js,css",
     "build-watch": "webpack -w",
@@ -13,24 +12,17 @@
   },
   "keywords": [
     "react",
-    "redux",
     "skeleton"
   ],
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
-    "chalk": "^2.4.1",
     "express": "^4.14.0",
     "pg": "^7.4.3",
     "phaser": "^3.16.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.2.2",
-    "redux": "^4.0.0",
-    "redux-devtools-extension": "^2.13.7",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
+    "react-router-dom": "^4.3.1",
     "sequelize": "^4.37.8"
   },
   "devDependencies": {

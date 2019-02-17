@@ -2,9 +2,10 @@ const router = require('express').Router()
 module.exports = router
 const {Score} = require('../db/index')
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    res.send('sending from scores/GET')
+    const scores = await Score.findAll()
+    res.json(scores)
   } catch (err) {
     next(err)
   }
@@ -12,8 +13,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newScore = await Score.create({score: req.body.score})
-    res.json(newScore)
+    await Score.create({nickname: req.body.nickname, score: req.body.score})
   } catch (err) {
     next(err)
   }

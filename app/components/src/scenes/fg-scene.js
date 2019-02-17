@@ -1,4 +1,3 @@
-/* eslint-disable id-length */
 import Phaser from 'phaser'
 import axios from 'axios'
 
@@ -20,21 +19,19 @@ export default class FgScene extends Phaser.Scene {
     this.load.image('sky', 'assets/sky.png')
     this.load.image('rocket', 'assets/rocket.png')
     this.load.image('ground', 'assets/platform.png')
-    this.load.image('star', 'assets/coinGold.png')
+    this.load.image('coin', 'assets/coinGold.png')
     this.load.image('bomb', 'assets/bomb.png')
     this.load.image('cloud', 'assets/cloud.png')
     this.load.spritesheet('dude', 'assets/dude.png', {
       frameWidth: 32,
       frameHeight: 48
-      // frameWidth: 80,
-      // frameHeight: 60
     })
   }
 
   create() {
     this.scoreText = this.add.text(16, 16, 'score: 0', {
-      fontSize: '32px',
-      fill: '#000'
+      // fontSize: '32px',
+      // fill: '#000'
     })
     this.cameras.main.setBounds(0, 0, 800, 1200)
     this.physics.world.setBounds(0, 0, 800, 1200)
@@ -64,19 +61,20 @@ export default class FgScene extends Phaser.Scene {
     //CREATE PLAYER
     this.player = this.physics.add.sprite(700, 1100, 'dude')
     this.player.setBounce(0.2)
+    this.player.setCollideWorldBounds(true)
     this.createPlayerAnims()
 
-    //CREATE STARS
-    this.stars = this.physics.add.group({
-      key: 'star',
+    //CREATE COINS
+    this.coins = this.physics.add.group({
+      key: 'coin',
       repeat: 100,
       setXY: {x: 12, y: 0, stepX: 70}
     })
-    this.stars.children.iterate(star => {
-      star.setBounce(1)
-      star.setVelocity(Phaser.Math.Between(100, 100), 20)
-      star.allowGravity = false
-      star.setCollideWorldBounds(true)
+    this.coins.children.iterate(coin => {
+      coin.setBounce(1)
+      coin.setVelocity(Phaser.Math.Between(100, 100), 20)
+      coin.allowGravity = false
+      coin.setCollideWorldBounds(true)
     })
 
     //CREATE CLOUDS
@@ -115,16 +113,14 @@ export default class FgScene extends Phaser.Scene {
   }
 
   setCollision() {
-    this.player.setCollideWorldBounds(true)
-
     this.physics.add.collider(this.player, this.platforms)
-    this.physics.add.collider(this.stars, this.platforms)
+    this.physics.add.collider(this.coins, this.platforms)
     this.physics.add.collider(this.rocket, this.platforms)
     this.physics.add.collider(this.bombs, this.platforms)
     this.physics.add.collider(
       this.player,
       this.clouds,
-      this.lockToPlatform,
+      this.rideCloud,
       null,
       this
     )
@@ -132,8 +128,8 @@ export default class FgScene extends Phaser.Scene {
 
     this.physics.add.overlap(
       this.player,
-      this.stars,
-      this.collectStar,
+      this.coins,
+      this.collectCoin,
       null,
       this
     )
@@ -167,7 +163,6 @@ export default class FgScene extends Phaser.Scene {
   createCloud(x, y) {
     let cloud = this.clouds.create(x, y, 'cloud')
     cloud.setCollideWorldBounds(true)
-    // cloud.setVelocityX(-160)
     cloud.setBounceX(0.8)
     cloud.body.allowGravity = false
     cloud.body.immovable = true
@@ -226,12 +221,12 @@ export default class FgScene extends Phaser.Scene {
   }
 
   //GAME UTILITIES
-  collectStar(player, star) {
-    star.disableBody(true, true)
+  collectCoin(player, coin) {
+    coin.disableBody(true, true)
     this.score += 10
     this.scoreText.setText('Score: ' + this.score)
-    if (this.stars.countActive(true) === 0) {
-      this.stars.children.iterate(child => {
+    if (this.coins.countActive(true) === 0) {
+      this.coins.children.iterate(child => {
         child.enableBody(true, child.x, 0, true, true)
       })
       this.createBomb()
@@ -240,16 +235,6 @@ export default class FgScene extends Phaser.Scene {
         Phaser.Math.Between(100, 1100)
       )
     }
-  }
-
-  hitBomb() {
-    this.physics.pause()
-    this.player.setTint(0xff0000)
-    this.player.anims.play('turn')
-    this.sendScore()
-    // setTimeout(() => {
-    //   this.endGame(this.player)
-    // }, 3000)
   }
 
   startRocket(player, rocket) {
@@ -271,7 +256,7 @@ export default class FgScene extends Phaser.Scene {
     player.setBounce(0.2)
   }
 
-  lockToPlatform(player, cloud) {
+  rideCloud(player, cloud) {
     if (
       cloud.body.moves &&
       cloud.body.touching.up &&
@@ -282,9 +267,27 @@ export default class FgScene extends Phaser.Scene {
     }
   }
   sendScore() {
-    console.log(`score is ${this.score}`)
+    let location = window.location.href
+    let nickname = location.slice(location.lastIndexOf('/') + 1)
     axios.post('./api/scores', {
+      nickname: nickname,
       score: this.score
     })
+  }
+
+  async hitBomb() {
+    this.physics.pause()
+    this.player.setTint(0xff0000)
+    this.player.anims.play('turn')
+    this.sendScore()
+    await setTimeout(() => {
+      this.player.disableBody(true, true)
+    }, 5000)
+    this.add.text(
+      200,
+      200,
+      `Game Over: Score: ${this.scoreText} Click to restart.`
+    )
+    document.getElementsByTagName('canvas')[0].addEventListener('click', () => {window.location = './'})
   }
 }
