@@ -20,7 +20,6 @@ form div {
 * {
   box-sizing: border-box;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
 }
 
 body {
@@ -28,9 +27,36 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 70px 0;
+  color: whitesmoke;
+  background: #0F2027;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.input {
+input[type="text"], input[type="submit"] {
+  font-size:25px;
   width: 200px;
-  border-radius: 50px;
+  height: 50px;
+  border-radius: 20px;
+  align-content: center;
+}
+
+.button {
+  width: 150px;
+  height: 50px;
+  background: #FDC830;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+}
+
+td, th {
+  text-align: left;
+  padding: 8px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

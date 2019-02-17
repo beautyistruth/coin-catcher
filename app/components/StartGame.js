@@ -2,6 +2,7 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
 import axios from 'axios'
+import HighScores from './HighScores'
 
 class StartGame extends React.Component {
   constructor() {
@@ -21,25 +22,28 @@ class StartGame extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    console.log(event.target.value)
     this.setState({redirect: true})
   }
   render() {
     return (
-      <div>
+      <div className="container">
         {this.state.redirect && <Redirect to={`./${this.state.value}`} />}
-        <h3>Coin Grabber</h3>
+        <h1>Coin Grabber</h1>
         <form onSubmit={this.handleSubmit} >
+        <p>Enter a nickname to continue.</p>
           <label>
             <input
               className="input"
               type="text"
               value={this.state.value}
               onChange={this.handleChange}
-              placeholder="Nickname"
+              // placeholder="Nickname"
             />
           </label>
-          <input type="submit" value="Play Game" />
+          <input type="submit" value="Play Game" className="button" />
         </form>
+        <HighScores />
       </div>
     )
   }
