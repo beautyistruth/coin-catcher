@@ -9,7 +9,6 @@ const App = () => {
       <div>
         <Route exact path="/" component={StartGame} />
         <Route exact path="/:nickname" component={PlayGame} />
-        <p>Place Game Text Here</p>
       </div>
     </Router>
   )

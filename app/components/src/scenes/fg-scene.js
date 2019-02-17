@@ -11,12 +11,11 @@ export default class FgScene extends Phaser.Scene {
     this.bombs = {}
     this.clouds = {}
     this.score = 0
-    this.scoreText = ''
+    this.scoreText = 'score: 0'
     this.enabledRocket = false
   }
 
   preload() {
-    this.load.image('sky', 'assets/sky.png')
     this.load.image('rocket', 'assets/rocket.png')
     this.load.image('ground', 'assets/platform.png')
     this.load.image('coin', 'assets/coinGold.png')
@@ -30,9 +29,9 @@ export default class FgScene extends Phaser.Scene {
 
   create() {
     this.scoreText = this.add.text(16, 16, 'score: 0', {
-      // fontSize: '32px',
-      // fill: '#000'
-    })
+      fontSize: '32px',
+      fill: '#000'
+    }).setScrollFactor(0);
     this.cameras.main.setBounds(0, 0, 800, 1200)
     this.physics.world.setBounds(0, 0, 800, 1200)
     this.cursors = this.input.keyboard.createCursorKeys()
@@ -283,11 +282,7 @@ export default class FgScene extends Phaser.Scene {
     await setTimeout(() => {
       this.player.disableBody(true, true)
     }, 5000)
-    this.add.text(
-      200,
-      200,
-      `Game Over: Score: ${this.scoreText} Click to restart.`
-    )
+    this.scoreText.setText(`Game Over. Score: ${this.score}. Click to restart.`)
     document.getElementsByTagName('canvas')[0].addEventListener('click', () => {window.location = './'})
   }
 }
