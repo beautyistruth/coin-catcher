@@ -33,7 +33,10 @@ class StartGame extends React.Component {
       <div className="container">
         {this.state.redirect && <Redirect to={`./${this.state.value}`} />}
         <h1 className="flex-item">Coin Catcher</h1>
-        <form className="flex-item, container" onSubmit={this.handleSubmit} >
+        <p className="flex-item, text" style={{textAlign: 'center-justified'}}>jump from platform to platform collecting falling coins to rack up points. ride clouds and grab rockets. watch out for exploding bombs. add your name to the high scores.
+        </p>
+
+        <form className="flex-item, container" style={{marginTop: '50px'}}onSubmit={this.handleSubmit} >
         <p className="flex-item">Enter a nickname to continue.</p>
           <label className="flex-item">
             <input
@@ -53,3 +56,11 @@ class StartGame extends React.Component {
 }
 
 export default StartGame
+
+
+/*
+
+zoom to planets beyond our solar system to reveal their data and habitability status (sourced from nasa). complete your journey to discover how the planet you know and love, earth, has all you'll ever need – as long as you treat her right.
+
+jump from platform to platform collecting falling coins to rack up points. ride clouds and grab rockets. watch out for exploding bombs. add your name to the high scores
+*/

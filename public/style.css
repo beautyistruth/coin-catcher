@@ -18,7 +18,7 @@ h1 {
   font-weight: 400;
   letter-spacing: 0.5rem;
   margin-top: 0%;
-  margin-bottom: 30%;
+  margin-bottom: 10%;
 }
 
 h1, h2, h3, h4, p {
@@ -27,14 +27,10 @@ h1, h2, h3, h4, p {
   letter-spacing: 0.2rem;
 }
 
-form div {
-  margin: 1em;
-  display: inline-block;
-}
-
 * {
   box-sizing: border-box;
   font-family: 'Raleway', 'Helvetica', 'Arial', sans-serif;
+  /* border: 1px solid black */
 }
 
 body {
@@ -69,7 +65,7 @@ input[type="submit"] {
   border-radius: 20px;
   background: #FDC830;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgb(235, 193, 173), #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border: none;
   text-align: center;
   margin-top: 20px;
@@ -83,13 +79,23 @@ td, th {
   padding: 8px;
 }
 
-.flex-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.text {
+  width: 30%;
+  margin-top: 0px;
+  margin: auto;
 }
 
+.container {
+  align-items: center;
+  text-align: center;
+
+
+}
 .flex-item {
   display: flex;
   justify-content: center;
+}
+
+form  {
+  display: inline-block;
 }
