@@ -2,27 +2,28 @@ const router = require('express').Router()
 module.exports = router
 const fs = require('fs')
 
-// router.get('/', async (req, res, next) => {
-//   try {
-//     const scores = await Score.findAll()
-//     res.json(scores)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+router.get('/',  (req, res, next) => {
+  try {
+    let highScores = JSON.parse(fs.readFileSync('HighScores.json').toString())
+    res.send(highScores)
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.post('/', (req, res, next) => {
   try {
     let highScores = JSON.parse(fs.readFileSync('HighScores.json').toString())
-    for (let i = 0; i < highScores.length; i++) 
-      if (req.body.score > highScores[i].score) {
-        console.log('higher')
+
+    for (let i = 0; i < highScores.scores.length; i++) {
+        if (req.body.score > highScores.scores[i].score) {
         let newHighScores = []
-        newHighScores = [...highScores.slice(0, i), {name: req.body.name, score: req.body.score}, ...highScores.slice(i, highScores.length - 1)]
-        console.log(newHighScores)
-        fs.writeFileSync(highScores.json, JSON.stringify(newHighScores))
-    }
-  }} catch (err) {
+        newHighScores = [...highScores.scores.slice(0, i), {name: req.body.name, score: req.body.score}, ...highScores.scores.slice(i, highScores.scores.length - 1)]
+        highScores.scores = newHighScores
+        fs.writeFileSync('HighScores.json', JSON.stringify(highScores))
+        break
+    }}
+  } catch (err) {
     next(err)
   }
 })
