@@ -1,6 +1,6 @@
 import React from 'react'
 
-const HighScores = () => {
+const HighScores = (props) => {
     return (
         <div>
         <h2>High Scores</h2>

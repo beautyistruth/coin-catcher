@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-child-element-spacing */
 import React from 'react'
 import {Redirect} from 'react-router-dom'
 import axios from 'axios'
@@ -7,13 +6,18 @@ import HighScores from './HighScores'
 class StartGame extends React.Component {
   constructor() {
     super()
-    this.state = {value: '', redirect: false}
+    this.state = {value: '', redirect: false, scores: []}
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-    const {data} = axios.get('./scores')
+  async componentDidMount() {
+    try {
+          const {data} = await axios.get('./api/scores')
+          this.setState({scores: data})
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   handleChange(event) {
@@ -22,14 +26,13 @@ class StartGame extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log(event.target.value)
     this.setState({redirect: true})
   }
   render() {
     return (
       <div className="container">
         {this.state.redirect && <Redirect to={`./${this.state.value}`} />}
-        <h1>Coin Grabber</h1>
+        <h1>Coin Catcher</h1>
         <form onSubmit={this.handleSubmit} >
         <p>Enter a nickname to continue.</p>
           <label>
@@ -38,12 +41,11 @@ class StartGame extends React.Component {
               type="text"
               value={this.state.value}
               onChange={this.handleChange}
-              // placeholder="Nickname"
             />
           </label>
           <input type="submit" value="Play Game" className="button" />
         </form>
-        <HighScores />
+        <HighScores scores={this.state.scores} />
       </div>
     )
   }
