@@ -3,9 +3,9 @@ import React from 'react'
 const HighScores = (props) => {
     const {scoresFromState} = props
     return (
-        <div>
-        <h2>High Scores</h2>
-        <table>
+    <div className="flex-item, container">
+        <h2 className="flex-item">High Scores</h2>
+        <table className="flex-item">
             <tbody>
         {scoresFromState.scores && scoresFromState.scores.map(singleScore => {
             return (<tr key={singleScore.name}>
@@ -14,7 +14,7 @@ const HighScores = (props) => {
         })}
             </tbody>
         </table>
-        </div>
+    </div>
     )
   }
 
