@@ -11,14 +11,14 @@ class StartGame extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  // async componentDidMount() {
-  //   try {
-  //         const {data} = await axios.get('./api/scores')
-  //         this.setState({scores: data})
-  //   } catch (err) {
-  //     console.error(err)
-  //   }
-  // }
+  async componentDidMount() {
+    try {
+          const {data} = await axios.get('./api/scores')
+          this.setState({scores: data})
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   handleChange(event) {
     this.setState({value: event.target.value})
@@ -45,7 +45,7 @@ class StartGame extends React.Component {
           </label>
           <input type="submit" value="Play Game" className="button" />
         </form>
-        <HighScores scores={this.state.scores} />
+        <HighScores scoresFromState={this.state.scores} />
       </div>
     )
   }
