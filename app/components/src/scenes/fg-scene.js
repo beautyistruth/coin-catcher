@@ -30,8 +30,8 @@ export default class FgScene extends Phaser.Scene {
 
   create() {
     this.scoreText = this.add.text(16, 16, this.score, {
-      fontSize: '32px',
-      fill: '#000'
+      fontSize: '40px',
+      fill: '#000',
     }).setScrollFactor(0);
     this.cameras.main.setBounds(0, 0, 800, 1200)
     this.physics.world.setBounds(0, 0, 800, 1200)
@@ -291,7 +291,7 @@ export default class FgScene extends Phaser.Scene {
     await setTimeout(() => {
       this.player.disableBody(true, true)
     }, 5000)
-    this.scoreText.setText('Final Score: ' + this.score + '\nClick to restart')
+    this.scoreText.setText(this.score + '\nClick to restart')
     document.getElementsByTagName('canvas')[0].addEventListener('click', () => {window.location = './'})
   }
 }
