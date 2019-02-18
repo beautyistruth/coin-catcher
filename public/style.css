@@ -13,6 +13,20 @@ nav a {
   margin: 1em;
 }
 
+h1 {
+  font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: 0.5rem;
+  margin-top: 0%;
+  margin-bottom: 30%;
+}
+
+h1, h2, h3, h4, p {
+  font-family: 'Raleway', 'Helvetica', 'Arial', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
@@ -20,7 +34,8 @@ form div {
 
 * {
   box-sizing: border-box;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Raleway', 'Helvetica', 'Arial', sans-serif;
+  /* border: 1px solid black */
 }
 
 body {
@@ -43,7 +58,7 @@ input[type="text"] {
   border: none;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: 20px;
+  margin-right: 10px;
   padding-left: 20px;
   outline: none;
 }
@@ -60,7 +75,7 @@ input[type="submit"] {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: 20px;
+  margin-left: 10px;
   vertical-align: middle;  
 }
 
