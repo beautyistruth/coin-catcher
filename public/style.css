@@ -79,7 +79,3 @@ td, th {
   display: flex;
   justify-content: center;
 }
-
-.flex-grow-item {
-  flex-grow: 1;
-}

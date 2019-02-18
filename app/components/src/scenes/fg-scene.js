@@ -291,7 +291,7 @@ export default class FgScene extends Phaser.Scene {
     await setTimeout(() => {
       this.player.disableBody(true, true)
     }, 5000)
-    this.scoreText.setText(this.score + '\nClick to restart')
+    this.scoreText.setText('Final Score: ' + this.score + '\nClick to restart')
     document.getElementsByTagName('canvas')[0].addEventListener('click', () => {window.location = './'})
   }
 }
