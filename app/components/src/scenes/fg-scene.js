@@ -18,6 +18,7 @@ export default class FgScene extends Phaser.Scene {
   preload() {
     this.load.image('rocket', 'assets/rocket.png')
     this.load.image('ground', 'assets/platform.png')
+    this.load.image('sky-platform', 'assets/sky-platform.png')
     this.load.image('coin', 'assets/coinGold.png')
     this.load.image('bomb', 'assets/bomb.png')
     this.load.image('cloud', 'assets/cloud-platform.png')
@@ -36,18 +37,20 @@ export default class FgScene extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 800, 1200)
     this.cursors = this.input.keyboard.createCursorKeys()
 
-    //CREATE PLATFORMS
+    //CREATE GROUND
     this.platforms = this.physics.add.staticGroup()
     this.platforms
       .create(400, 1200, 'ground')
       .setScale(2)
       .refreshBody()
 
-    this.platforms.create(100, 1050, 'ground')
-    this.platforms.create(50, 250, 'ground')
-    this.platforms.create(50, 800, 'ground')
-    this.platforms.create(750, 220, 'ground')
-    this.platforms.create(750, 600, 'ground')
+    //CREATE SKY-PLATFORM
+    this.skyPlatforms = this.physics.add.staticGroup()
+    this.skyPlatforms.create(100, 1050, 'sky-platform')
+    this.skyPlatforms.create(50, 250, 'sky-platform')
+    this.skyPlatforms.create(50, 800, 'sky-platform')
+    this.skyPlatforms.create(750, 220, 'sky-platform')
+    this.skyPlatforms.create(750, 600, 'sky-platform')
 
     //CREATE ROCKET
     this.rocket = this.physics.add.group()
@@ -81,7 +84,7 @@ export default class FgScene extends Phaser.Scene {
     this.createCloud(500, 750)
     this.createCloud(1000, 900)
     this.createCloud(1000, 500)
-    this.createCloud(200, 300)
+    this.createCloud(150, 300)
 
     //CREATE BOMBS
     this.bombs = this.physics.add.group()
@@ -102,7 +105,7 @@ export default class FgScene extends Phaser.Scene {
 
     //JUMP
     if (this.cursors.space.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330)
+      this.player.setVelocityY(-380)
     }
 
     //FLYING
@@ -116,6 +119,12 @@ export default class FgScene extends Phaser.Scene {
     this.physics.add.collider(this.coins, this.platforms)
     this.physics.add.collider(this.rocket, this.platforms)
     this.physics.add.collider(this.bombs, this.platforms)
+
+    this.physics.add.collider(this.player, this.skyPlatforms)
+    this.physics.add.collider(this.coins, this.skyPlatforms)
+    this.physics.add.collider(this.rocket, this.skyPlatforms)
+    this.physics.add.collider(this.bombs, this.skyPlatforms)
+
     this.physics.add.collider(
       this.player,
       this.clouds,
@@ -282,7 +291,7 @@ export default class FgScene extends Phaser.Scene {
     await setTimeout(() => {
       this.player.disableBody(true, true)
     }, 5000)
-    this.scoreText.setText(`${this.score} Click to restart.`)
+    this.scoreText.setText(this.score + '\nClick to restart')
     document.getElementsByTagName('canvas')[0].addEventListener('click', () => {window.location = './'})
   }
 }
