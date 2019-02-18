@@ -265,20 +265,20 @@ export default class FgScene extends Phaser.Scene {
       player.x = cloud.x
     }
   }
-  sendScore() {
-    let location = window.location.href
-    let nickname = location.slice(location.lastIndexOf('/') + 1)
-    axios.post('./api/scores', {
-      nickname: nickname,
-      score: this.score
-    })
-  }
+  // sendScore() {
+  //   let location = window.location.href
+  //   let nickname = location.slice(location.lastIndexOf('/') + 1)
+  //   axios.post('./api/scores', {
+  //     nickname: nickname,
+  //     score: this.score
+  //   })
+  // }
 
   async hitBomb() {
     this.physics.pause()
     this.player.setTint(0xff0000)
     this.player.anims.play('turn')
-    this.sendScore()
+    // this.sendScore()
     await setTimeout(() => {
       this.player.disableBody(true, true)
     }, 5000)
